@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
-import LoginFormPage from "./components/LoginFormPage";
-import { authenticate } from "./store/session";
-import Navigation from "./components/Navigation";
+import { useState } from "react";
+import "./index.css";
+import Details from "./components/Details";
+import Tiptap from "./components/TipTap";
 
 function App() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(authenticate()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+  const [description, setDescription] = useState("");
 
   return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
-    </>
+    <div className="App">
+      <Tiptap setDescription={setDescription} />
+      <Details description={description} />
+    </div>
   );
 }
 
